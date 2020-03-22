@@ -1,0 +1,1013 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "digitalekrankheitsanamnese _31_b_ID1",
+    "version": "V1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080"
+    }
+  ],
+  "paths": {
+    "/api/v1/users/{userId}/questionnaires/{questionnaireId}/questions": {
+      "get": {
+        "tags": [
+          "Question"
+        ],
+        "summary": "Returns the list of questions that belongs to the questionnaire having the specified questionnaire ID and belonging to the user with the specified userId",
+        "operationId": "getApiV1UsersByUserIdQuestionnairesByQuestionnaireIdQuestions",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "questionnaireId",
+            "in": "path",
+            "description": "The ID of the questionnaire",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful response",
+            "content": {
+              "application/vnd.de.health.questions+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questions"
+                },
+                "examples": {
+                  "List of questions": {
+                    "value": {"questions":[{"userId":"0","questionnaireId":"4","questionId":"1","question":"Altersangabe","description":"Bitte nennen Sie Ihr Alter","value":null,"type":"int","category":"Allgemein","Options":[{"Name":"Alter in Jahre","color":"#0000FF"}],"self":{"href":"/api/v1/users/0/questionnaires/4/questions/1"},"user":{"href":"/api/v1/users/0"},"questionnaire":{"href":"/api/v1/users/0/questionnaires/4"},"all":{"href":"/api/v1/users/0/questionnaires/4/questions"},"update_question":{"href":"/api/v1/users/0/questionnaires/4/questions/1","action":"PUT"},"next":{"href":"/api/v1/users/0/questionnaires/4/questions/2"}}],"userId":"0","questionnaireId":"4","self":{"href":"/api/v1/users/0/questionnaires/4/questions"},"user":{"href":"/api/v1/users/0"},"questionnaire":{"href":"/api/v1/users/0/questionnaires/4"}}
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The user or questionnaire with the passed ID does not exist",
+            "content": {
+              "application/vnd.de.health.error+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "examples": {
+                  "User not found": {
+                    "value": {"code":404,"message":"The user having the 'userId':'{VALUE}' does not exist"}
+                  },
+                  "Questionnaire not found": {
+                    "value": {"code":404,"message":"The questionnaire having the 'questionnaireId':'{VALUE}' does not exist"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{userId}/questionnaires/{questionnaireId}/questions/{questionId}": {
+      "get": {
+        "tags": [
+          "Question"
+        ],
+        "summary": "Returns the question that has the specified questionId and belongs to the questionnaire with the specified questionnaire ID and belongs to the user with the specified userId",
+        "operationId": "getApiV1UsersByUserIdQuestionnairesByQuestionnaireIdQuestionsByQuestionId",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "questionnaireId",
+            "in": "path",
+            "description": "The ID of the questionnaire",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "questionId",
+            "in": "path",
+            "description": "The ID of the question",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful response",
+            "content": {
+              "application/vnd.de.health.question+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Question"
+                },
+                "examples": {
+                  "Question": {
+                    "value": {"userId":"0","questionnaireId":"4","questionId":"10","question":"Wo waren Sie in den letzten 14 Tagen?","description":"Bitte nennen Sie das Land, indem Sie sich in den letzten 14 Tagen aufgehalten haben.","value":null,"type":"atomic","category":"Sonstiges","Options":[{"Name":"Italien","color":"#FFFF00"},{"Name":"Österreich","color":"#FF0000"}],"self":{"href":"/api/v1/users/0/questionnaires/4/questions/10"},"user":{"href":"/api/v1/users/0"},"questionnaire":{"href":"/api/v1/users/0/questionnaires/4"},"all":{"href":"/api/v1/users/0/questionnaires/4/questions"},"update_question":{"href":"/api/v1/users/0/questionnaires/4/questions/10","action":"PUT"},"next":{"href":"/api/v1/users/0/questionnaires/4/summary"}}
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The user or questionnaire with the passed ID does not exist",
+            "content": {
+              "application/vnd.de.health.error+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "examples": {
+                  "User not found": {
+                    "value": {"code":404,"message":"The user having the 'userId':'{VALUE}' does not exist"}
+                  },
+                  "Questionnaire not found": {
+                    "value": {"code":404,"message":"The questionnaire having the 'questionnaireId':'{VALUE}' does not exist"}
+                  },
+                  "Question not found": {
+                    "value": {"code":404,"message":"The question having the 'questionId':'{VALUE}' does not exist"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Question"
+        ],
+        "summary": "Updates the question that has the specified questionId and belongs to the questionnaire with the specified questionnaire ID and belongs to the user with the specified userId",
+        "operationId": "putApiV1UsersByUserIdQuestionnairesByQuestionnaireIdQuestionsByQuestionId",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "questionnaireId",
+            "in": "path",
+            "description": "The ID of the questionnaire",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "questionId",
+            "in": "path",
+            "description": "The ID of the question",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Answer",
+          "content": {
+            "application/vnd.de.health.question+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Question"
+              },
+              "examples": {
+                "Data": {
+                  "value": {"value":"Italien"}
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The response contains the updated question",
+            "content": {
+              "application/vnd.de.health.user+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "examples": {
+                  "Question": {
+                    "value": {"userId":"0","questionnaireId":"4","questionId":"10","question":"Wo waren Sie in den letzten 14 Tagen?","description":"Bitte nennen Sie das Land, indem Sie sich in den letzten 14 Tagen aufgehalten haben.","value":null,"type":"atomic","category":"Sonstiges","Options":[{"Name":"Italien","color":"#FFFF00"},{"Name":"Österreich","color":"#FF0000"}],"self":{"href":"/api/v1/users/0/questionnaires/4/questions/10"},"user":{"href":"/api/v1/users/0"},"questionnaire":{"href":"/api/v1/users/0/questionnaires/4"},"all":{"href":"/api/v1/users/0/questionnaires/4/questions"},"update_question":{"href":"/api/v1/users/0/questionnaires/4/questions/10","action":"PUT"},"next":{"href":"/api/v1/users/0/questionnaires/4/summary"}}
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The user or questionnaire with the passed ID does not exist",
+            "content": {
+              "application/vnd.de.health.error+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "examples": {
+                  "User not found": {
+                    "value": {"code":404,"message":"The user having the 'userId':'{VALUE}' does not exist"}
+                  },
+                  "Questionnaire not found": {
+                    "value": {"code":404,"message":"The questionnaire having the 'questionnaireId':'{VALUE}' does not exist"}
+                  },
+                  "Question not found": {
+                    "value": {"code":404,"message":"The question having the 'questionId':'{VALUE}' does not exist"}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The submitted answer is invalid.",
+            "content": {
+              "application/vnd.de.health.error+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "examples": {
+                  "Summary not available": {
+                    "value": {"code":400,"message":"The answer is invalid"}
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The questionnaire has been completed. Hence, it is not possible to modify this question.",
+            "content": {
+              "application/vnd.de.health.error+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "examples": {
+                  "Summary not available": {
+                    "value": {"code":409,"message":"The questionnaire has been completed. Hence, it is not possible to modify this question."}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{userId}/questionnaires": {
+      "get": {
+        "tags": [
+          "Questionnaire"
+        ],
+        "summary": "Returns the list of questionnaires of the user with the specified userId",
+        "operationId": "getApiV1UsersByUserIdQuestionnaires",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful response",
+            "content": {
+              "application/vnd.de.health.questionnaires+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questionnaires"
+                },
+                "examples": {
+                  "List of questionnaires": {
+                    "value": {"questionnaires":[{"userId":"0","questionnaireId":"4","date":"2020-03-21.12:11:44","is_completed":true,"version":"1","self":{"href":"/api/v1/users/0/questionnaires/4"},"questions":{"href":"/api/v1/users/0/questionnaires/4/questions"},"user":{"href":"/api/v1/users/0"},"all":{"href":"/api/v1/users/0/questionnaires"},"first":{"href":"/api/v1/users/0/questionnaires/4/question/0"},"summary":{"href":"/api/v1/users/0/questionnaires/4/summary"}}],"userId":"0","self":{"href":"/api/v1/users/0/questionnaires"},"user":{"href":"/api/v1/users/0"},"create_questionnaire":{"href":"/api/v1/users/0/questionnaires","action":"POST"}}
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The user with the passed ID does not exist",
+            "content": {
+              "application/vnd.de.health.error+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "examples": {
+                  "User not found": {
+                    "value": {"code":404,"message":"The user having the 'userId':'{VALUE}' does not exist"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Questionnaire"
+        ],
+        "summary": "Creates a new questionnaire for the user with the specified userId",
+        "operationId": "postApiV1UsersByUserIdQuestionnaires",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "headers": {
+              "Location": {
+                "description": "Contains the URL pointing to the resource representing the questionnaire that has been successfully registered",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The user with the passed ID does not exist",
+            "content": {
+              "application/vnd.de.health.error+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "examples": {
+                  "User not found": {
+                    "value": {"code":404,"message":"The user having the 'userId':'{VALUE}' does not exist"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{userId}/questionnaires/{questionnaireId}": {
+      "get": {
+        "tags": [
+          "Questionnaire"
+        ],
+        "summary": "Returns the questionnaire with the specified questionnaireId that belongs to the user with the specified userId",
+        "operationId": "getApiV1UsersByUserIdQuestionnairesByQuestionnaireId",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "questionnaireId",
+            "in": "path",
+            "description": "The ID of the questionnaire",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfull response",
+            "content": {
+              "application/vnd.de.health.questionaire+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questionnaire"
+                },
+                "examples": {
+                  "Questionnaire": {
+                    "value": {"userId":"0","questionnaireId":"4","date":"2020-03-21.12:11:44","is_completed":true,"version":"1","self":{"href":"/api/v1/users/0/questionnaires/4"},"questions":{"href":"/api/v1/users/0/questionnaires/4/questions"},"user":{"href":"/api/v1/users/0"},"all":{"href":"/api/v1/users/0/questionnaires"},"first":{"href":"/api/v1/users/0/questionnaires/4/question/0"},"summary":{"href":"/api/v1/users/0/questionnaires/4/summary"}}
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The user or questionnaire with the passed ID does not exist",
+            "content": {
+              "application/vnd.de.health.error+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "examples": {
+                  "User not found": {
+                    "value": {"code":404,"message":"The user having the 'userId':'{VALUE}' does not exist"}
+                  },
+                  "Questionnaire not found": {
+                    "value": {"code":404,"message":"The questionnaire having the 'questionnaireId':'{VALUE}' does not exist"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{userId}/questionnaires/{questionnaireId}/summary": {
+      "get": {
+        "tags": [
+          "Questionnaire"
+        ],
+        "summary": "Returns the summary that belongs of the questionaire having the specified questionnaireId and belonging to the user with the specified userId",
+        "operationId": "getApiV1UsersByUserIdQuestionnairesByQuestionnaireIdSummary",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "questionnaireId",
+            "in": "path",
+            "description": "The ID of the questionnaire",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfull response",
+            "content": {
+              "application/vnd.de.health.summary+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Summary"
+                },
+                "examples": {
+                  "Questionnaire": {
+                    "value": {"userId":"0","questionnaireId":"4","degree_of_sickness":0.7,"self":{"href":"/api/v1/users/0/questionnaires/4/summary"},"user":{"href":"/api/v1/users/0"},"questionaire":{"href":"/api/v1/users/0/questionnaires/4"}}
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The user or questionnaire with the passed ID does not exist",
+            "content": {
+              "application/vnd.de.health.error+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "examples": {
+                  "User not found": {
+                    "value": {"code":404,"message":"The user having the 'userId':'{VALUE}' does not exist"}
+                  },
+                  "Questionnaire not found": {
+                    "value": {"code":404,"message":"The questionnaire having the 'questionnaireId':'{VALUE}' does not exist"}
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The questionnaire has not been completed yet. A summary is not available.",
+            "content": {
+              "application/vnd.de.health.error+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "examples": {
+                  "Summary not available": {
+                    "value": {"code":409,"message":"The questionnaire has not been completed yet. A summary is not available."}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Returns the list of registered users",
+        "operationId": "getApiV1Users",
+        "responses": {
+          "200": {
+            "description": "successful response",
+            "content": {
+              "application/vnd.de.health.users+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                },
+                "examples": {
+                  "List of registered users": {
+                    "value": {"users":[{"userId":"0","name":"Max","surname":"Mustermann","socialId":"DE12345678","self":{"href":"/api/v1/users/0"},"questionnaires":{"href":"/api/v1/users/0/questionnaires"},"all":{"href":"/api/v1/users"},"update_user":{"href":"/api/v1/users/0","action":"PUT"}}],"self":{"href":"/api/v1/users"},"register_user":{"href":"/api/v1/users","action":"POST"}}
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Registers a new user",
+        "operationId": "postApiV1Users",
+        "requestBody": {
+          "description": "Name, surname and social ID",
+          "content": {
+            "application/vnd.de.health.user+json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "Data": {
+                  "value": {"name":"Max","surname":"Musternmann","socialId":"DE12345678"}
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "headers": {
+              "Location": {
+                "description": "Contains the URL pointing to the resource representing the user that has been successfully registered",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{userId}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Returns the user with the specified userId",
+        "operationId": "getApiV1UsersByUserId",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfull response",
+            "content": {
+              "application/vnd.de.health.user+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "examples": {
+                  "User": {
+                    "value": {"userId":"0","name":"Max","surname":"Mustermann","socialId":"DE12345678","self":{"href":"/api/v1/users/0"},"questionnaires":{"href":"/api/v1/users/0/questionnaires"},"all":{"href":"/api/v1/users"},"update_user":{"href":"/api/v1/users/0","action":"PUT"}}
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The user with the passed ID does not exist",
+            "content": {
+              "application/vnd.de.health.error+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "examples": {
+                  "User not found": {
+                    "value": {"code":404,"message":"The user having the 'userId':'{VALUE}' does not exist"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Updates the user profile with the specified userId",
+        "operationId": "putApiV1UsersByUserId",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Name, surname and social ID",
+          "content": {
+            "application/vnd.de.health.user+json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "Data": {
+                  "value": {"name":"Max","surname":"Musternmann","socialId":"DE12345678"}
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The response contains the updated user",
+            "content": {
+              "application/vnd.de.health.user+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "examples": {
+                  "User": {
+                    "value": {"userId":"0","name":"Max","surname":"Mustermann","socialId":"DE12345678","self":{"href":"/api/v1/users/0"},"questionnaires":{"href":"/api/v1/users/0/questionnaires"},"all":{"href":"/api/v1/users"},"update_user":{"href":"/api/v1/users/0","action":"PUT"}}
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The user with the passed ID does not exist",
+            "content": {
+              "application/vnd.de.health.error+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "examples": {
+                  "User not found": {
+                    "value": {"code":404,"message":"The user having the 'userId':'{VALUE}' does not exist"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Questions": {
+        "type": "object",
+        "properties": {
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Question"
+            },
+            "description": "The collection of Questions"
+          },
+          "userId": {
+            "type": "string",
+            "description": "The ID of the associated user"
+          },
+          "questionnaireId": {
+            "type": "string",
+            "description": "The ID of the associated Questionnaire"
+          },
+          "self": {
+            "$ref": "#/components/schemas/Hyperlink"
+          },
+          "user": {
+            "$ref": "#/components/schemas/Hyperlink"
+          },
+          "questionnaire": {
+            "$ref": "#/components/schemas/Hyperlink"
+          }
+        },
+        "example": {"questions":[{"userId":"0","questionnaireId":"4","questionId":"1","question":"Altersangabe","description":"Bitte nennen Sie Ihr Alter","value":null,"type":"int","category":"Allgemein","Options":[{"Name":"Alter in Jahre","color":"#0000FF"}],"self":{"href":"/api/v1/users/0/questionnaires/4/questions/1"},"user":{"href":"/api/v1/users/0"},"questionnaire":{"href":"/api/v1/users/0/questionnaires/4"},"all":{"href":"/api/v1/users/0/questionnaires/4/questions"},"update_question":{"href":"/api/v1/users/0/questionnaires/4/questions/1","action":"PUT"},"next":{"href":"/api/v1/users/0/questionnaires/4/questions/2"}}],"userId":"0","questionnaireId":"4","self":{"href":"/api/v1/users/0/questionnaires/4/questions"},"user":{"href":"/api/v1/users/0"},"questionnaire":{"href":"/api/v1/users/0/questionnaires/4"}}
+      },
+      "Question": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "The ID of the User this Question is associated with"
+          },
+          "questionnaireId": {
+            "type": "string",
+            "description": "The ID of the Questionnaire this Question is associated with"
+          },
+          "questionId": {
+            "type": "string",
+            "description": "The ID of the Question"
+          },
+          "question": {
+            "type": "string",
+            "description": "The displayed question, e.g. \"Wie alt sind Sie?\""
+          },
+          "description": {
+            "type": "string",
+            "description": "Further details, e.g. \"Bitte geben Sie Ihr Alter an\""
+          },
+          "value": {
+            "type": "object",
+            "description": "The answer, e.g. \"40\""
+          },
+          "type": {
+            "type": "string",
+            "description": "The data type that is expected"
+          },
+          "category": {
+            "type": "string",
+            "description": "The category of this Question"
+          },
+          "Options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Option"
+            },
+            "description": "The set of Options"
+          },
+          "self": {
+            "$ref": "#/components/schemas/Hyperlink"
+          },
+          "user": {
+            "$ref": "#/components/schemas/Hyperlink"
+          },
+          "questionnaire": {
+            "$ref": "#/components/schemas/Hyperlink"
+          },
+          "all": {
+            "$ref": "#/components/schemas/Hyperlink"
+          },
+          "update_question": {
+            "$ref": "#/components/schemas/Hyperlink"
+          },
+          "next": {
+            "$ref": "#/components/schemas/Hyperlink"
+          }
+        },
+        "example": {"value":"Italien"}
+      },
+      "Option": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string",
+            "description": "The displayed name of the option, e.g. \"Ja\""
+          },
+          "color": {
+            "type": "string",
+            "description": "The displayed color of the option in order to simplify the evaluation of a questionnaire"
+          }
+        }
+      },
+      "Hyperlink": {
+        "type": "object",
+        "properties": {
+          "rel": {
+            "type": "string",
+            "description": "The IANA relation type (optional)"
+          },
+          "desc": {
+            "type": "string",
+            "description": "A description providing further details about the semantic relation (optional)"
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI addressing the related resource"
+          },
+          "templated": {
+            "type": "boolean",
+            "description": "A flag indicating whether 'href' contains a URI-Template describing a range of URIs (see RFC6570)",
+            "nullable": true
+          },
+          "action": {
+            "type": "string",
+            "description": "The action (i.e. HTTP method) a client should apply when following this hyperlink"
+          }
+        }
+      },
+      "ErrorMessage": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "The HTTP status code (the three digit code) of the error message",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "The message providing further details concerning the error"
+          }
+        },
+        "example": {"code":404,"message":"The user having the 'userId':'{VALUE}' does not exist"}
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "The ID of the User"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the User"
+          },
+          "surname": {
+            "type": "string",
+            "description": "The surname of the User"
+          },
+          "socialId": {
+            "type": "string",
+            "description": "The social ID of the User"
+          },
+          "self": {
+            "$ref": "#/components/schemas/Hyperlink"
+          },
+          "questionnaires": {
+            "$ref": "#/components/schemas/Hyperlink"
+          },
+          "all": {
+            "$ref": "#/components/schemas/Hyperlink"
+          },
+          "update_user": {
+            "$ref": "#/components/schemas/Hyperlink"
+          }
+        },
+        "example": {"userId":"0","name":"Max","surname":"Mustermann","socialId":"DE12345678","self":{"href":"/api/v1/users/0"},"questionnaires":{"href":"/api/v1/users/0/questionnaires"},"all":{"href":"/api/v1/users"},"update_user":{"href":"/api/v1/users/0","action":"PUT"}}
+      },
+      "Questionnaires": {
+        "type": "object",
+        "properties": {
+          "questionnaires": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Questionnaire"
+            },
+            "description": "The collection of Questionnaires"
+          },
+          "userId": {
+            "type": "string",
+            "description": "The ID of the associated User"
+          },
+          "self": {
+            "$ref": "#/components/schemas/Hyperlink"
+          },
+          "user": {
+            "$ref": "#/components/schemas/Hyperlink"
+          },
+          "create_questionnaire": {
+            "$ref": "#/components/schemas/Hyperlink"
+          }
+        },
+        "example": {"questionnaires":[{"userId":"0","questionnaireId":"4","date":"2020-03-21.12:11:44","is_completed":true,"version":"1","self":{"href":"/api/v1/users/0/questionnaires/4"},"questions":{"href":"/api/v1/users/0/questionnaires/4/questions"},"user":{"href":"/api/v1/users/0"},"all":{"href":"/api/v1/users/0/questionnaires"},"first":{"href":"/api/v1/users/0/questionnaires/4/question/0"},"summary":{"href":"/api/v1/users/0/questionnaires/4/summary"}}],"userId":"0","self":{"href":"/api/v1/users/0/questionnaires"},"user":{"href":"/api/v1/users/0"},"create_questionnaire":{"href":"/api/v1/users/0/questionnaires","action":"POST"}}
+      },
+      "Questionnaire": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "The ID of the User this Questionnaire is associated with"
+          },
+          "questionnaireId": {
+            "type": "string",
+            "description": "The ID of the Questionnaire"
+          },
+          "date": {
+            "type": "string",
+            "description": "The date when the client started this Questionnaire"
+          },
+          "is_completed": {
+            "type": "boolean",
+            "description": "A flag indicating whether this Questionnaire has been completed or not"
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of this Questionnaire"
+          },
+          "self": {
+            "$ref": "#/components/schemas/Hyperlink"
+          },
+          "questions": {
+            "$ref": "#/components/schemas/Hyperlink"
+          },
+          "user": {
+            "$ref": "#/components/schemas/Hyperlink"
+          },
+          "all": {
+            "$ref": "#/components/schemas/Hyperlink"
+          },
+          "first": {
+            "$ref": "#/components/schemas/Hyperlink"
+          },
+          "summary": {
+            "$ref": "#/components/schemas/Hyperlink"
+          }
+        },
+        "example": {"userId":"0","questionnaireId":"4","date":"2020-03-21.12:11:44","is_completed":true,"version":"1","self":{"href":"/api/v1/users/0/questionnaires/4"},"questions":{"href":"/api/v1/users/0/questionnaires/4/questions"},"user":{"href":"/api/v1/users/0"},"all":{"href":"/api/v1/users/0/questionnaires"},"first":{"href":"/api/v1/users/0/questionnaires/4/question/0"},"summary":{"href":"/api/v1/users/0/questionnaires/4/summary"}}
+      },
+      "Summary": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "The ID of the associated User"
+          },
+          "questionnaireId": {
+            "type": "string",
+            "description": "The ID of the associated Questionnaire"
+          },
+          "degree_of_sickness": {
+            "type": "number",
+            "description": "The degree of sickness",
+            "format": "double"
+          },
+          "self": {
+            "$ref": "#/components/schemas/Hyperlink"
+          },
+          "user": {
+            "$ref": "#/components/schemas/Hyperlink"
+          },
+          "questionaire": {
+            "$ref": "#/components/schemas/Hyperlink"
+          }
+        },
+        "example": {"userId":"0","questionnaireId":"4","degree_of_sickness":0.7,"self":{"href":"/api/v1/users/0/questionnaires/4/summary"},"user":{"href":"/api/v1/users/0"},"questionaire":{"href":"/api/v1/users/0/questionnaires/4"}}
+      },
+      "Users": {
+        "type": "object",
+        "properties": {
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User"
+            },
+            "description": "A collection of Users"
+          },
+          "self": {
+            "$ref": "#/components/schemas/Hyperlink"
+          },
+          "register_user": {
+            "$ref": "#/components/schemas/Hyperlink"
+          }
+        },
+        "example": {"users":[{"userId":"0","name":"Max","surname":"Mustermann","socialId":"DE12345678","self":{"href":"/api/v1/users/0"},"questionnaires":{"href":"/api/v1/users/0/questionnaires"},"all":{"href":"/api/v1/users"},"update_user":{"href":"/api/v1/users/0","action":"PUT"}}],"self":{"href":"/api/v1/users"},"register_user":{"href":"/api/v1/users","action":"POST"}}
+      }
+    }
+  }
+}

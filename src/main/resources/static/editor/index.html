@@ -1,0 +1,366 @@
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css" />
+
+		<script src="index.js"></script>
+		<script src="viz.js"></script>
+		
+		<link rel="stylesheet" href="index.css">
+		<link rel="stylesheet" href="darcula.css">
+		<link rel="shortcut icon" type="image/x-icon" href="OHCLogo.svg" />
+		<title>OHC</title>
+	</head>
+	<body>
+		<a id="downloadJson" style="display:none"></a>
+		<div class="header">JsonEditor OpenHealthCheck</div>
+		<div class="container">
+			<div class="left">
+					<div class="btns">	
+						<img class="logo" src="OHCLogo.svg"/>
+						<button onclick="drawDiagram();">Refresh diagram</button>
+						<button onclick="downloadJson();">Download Json</button>
+						
+					</div>
+					<textarea class="textarea" cols="80" rows="10" id="textarea"  onchange="drawDiagram()" >
+{
+					"version": "1",
+					"start": "1",
+					"questions": [{
+							"id": "1",
+							"question": "Wie alt sind Sie? ",
+							"description": "",
+							"type": "int",
+							"category": "Allgemein",
+							"options": [{
+									"name": "Alter",
+									"next": "2"
+								}
+							]
+						}, {
+							"id": "2",
+							"question": "Wie ist Ihre aktuelle Wohnsituation? ",
+							"description": "",
+							"type": "atomic",
+							"category": "Allgemein",
+							"options": [{
+									"name": "alleine",
+									"next": "3"
+								}, {
+									"name": "Paar",
+									"next": "3"
+								}, {
+									"name": "Familie",
+									"next": "3"
+								}
+							]
+						}, {
+							"id": "3",
+							"question": "Sind Sie in einem der folgenden Bereiche tätig? ",
+							"description": "",
+							"type": "atomic",
+							"category": "Allgemein",
+							"options": [{
+									"name": "ja",
+									"next": "4"
+								}, {
+									"name": "nein",
+									"next": "4"
+								}
+							]
+						}, {
+							"id": "4",
+							"question": "Rauchen Sie?",
+							"description": "",
+							"type": "atomic",
+							"category": "Allgemein",
+							"options": [{
+									"name": "ja",
+									"next": "5"
+								}, {
+									"name": "nein",
+									"next": "5"
+								}
+							]
+						}, {
+							"id": "5",
+							"question": "Haben Sie chronische Lungenvorerkrankungen? ",
+							"description": "",
+							"type": "atomic",
+							"category": "Allgemein",
+							"options": [{
+									"name": "ja",
+									"next": "6"
+								}, {
+									"name": "nein",
+									"next": "6"
+								}
+							]
+						}, {
+							"id": "6",
+							"question": "Haben Sie Diabetes? Haben Sie Herzerkrankungen? ",
+							"description": "",
+							"type": "atomic",
+							"category": "Allgemein",
+							"options": [{
+									"name": "ja",
+									"next": "7"
+								}, {
+									"name": "nein",
+									"next": "7"
+								}, {
+									"name": "Ich weiß es nicht",
+									"next": "7"
+								}
+							]
+						}, {
+							"id": "7",
+							"question": "Haben Sie Fettsucht (Adipositas)? Sind Sie schwanger? ",
+							"description": "",
+							"type": "atomic",
+							"category": "Allgemein",
+							"options": [{
+									"name": "ja",
+									"next": "8"
+								}, {
+									"name": "nein",
+									"next": "8"
+								}, {
+									"name": "Ich weiß es nicht",
+									"next": "8"
+								}
+							]
+						}, {
+							"id": "8",
+							"question": "Nehmen Sie aktuell Cortison? ",
+							"description": "",
+							"type": "atomic",
+							"category": "Allgemein",
+							"options": [{
+									"name": "ja",
+									"next": "9"
+								}, {
+									"name": "nein",
+									"next": "9"
+								}, {
+									"name": "Ich weiß es nicht",
+									"next": "9"
+								}
+							]
+						}, {
+							"id": "9",
+							"question": "Nehmen Sie aktuell Immunsuppressiva? ",
+							"description": "",
+							"type": "atomic",
+							"category": "Allgemein",
+							"options": [{
+									"name": "ja",
+									"next": "10"
+								}, {
+									"name": "nein",
+									"next": "10"
+								}
+							]
+						}, {
+							"id": "10",
+							"question": "Haben Sie sich im Zeitraum von Oktober 2019 bis heute gegen Grippe impfen lassen?",
+							"description": "",
+							"type": "atomic",
+							"category": "Allgemein",
+							"options": [{
+									"name": "ja",
+									"next": "11"
+								}, {
+									"name": "nein",
+									"next": "11"
+								}
+							]
+						}, {
+							"id": "11",
+							"question": "Hatten Sie Fieber in den letzten 24 Stunden? ",
+							"description": "",
+							"type": "atomic",
+							"category": "Symptome",
+							"options": [{
+									"name": "ja",
+									"next": "12"
+								}, {
+									"name": "nein",
+									"next": "12"
+								}
+							]
+						}, {
+							"id": "12",
+							"question": "Hatten Sie Fieber (über 38°C) in den letzten 4 Tagen? ",
+							"description": "",
+							"type": "atomic",
+							"category": "Symptome",
+							"options": [{
+									"name": "ja",
+									"next": "13"
+								}, {
+									"name": "nein",
+									"next": "13"
+								}
+							]
+						}, {
+							"id": "13",
+							"question": "Wie hoch war die höchste Temperatur? ",
+							"description": "",
+							"type": "double",
+							"category": "Symptome",
+							"options": [{
+									"name": "Temperatur",
+									"next": "14"
+								}
+							]
+						}, {
+							"id": "14",
+							"question": "Haben Sie Schüttelfrost? ",
+							"description": "",
+							"type": "atomic",
+							"category": "Symptome",
+							"options": [{
+									"name": "ja",
+									"next": "15"
+								}, {
+									"name": "nein",
+									"next": "15"
+								}
+							]
+						}, {
+							"id": "15",
+							"question": "Fühlen sie sich schlapp oder abgeschlagen? ",
+							"description": "",
+							"type": "atomic",
+							"category": "Symptome",
+							"options": [{
+									"name": "ja",
+									"next": "16"
+								}, {
+									"name": "nein",
+									"next": "16"
+								}
+							]
+						}, {
+							"id": "16",
+							"question": "Haben Sie Gliederschmerzen? ",
+							"description": "",
+							"type": "atomic",
+							"category": "Symptome",
+							"options": [{
+									"name": "ja",
+									"next": "17"
+								}, {
+									"name": "nein",
+									"next": "17"
+								}
+							]
+						}, {
+							"id": "17",
+							"question": "Haben Sie Husten? ",
+							"description": "",
+							"type": "atomic",
+							"category": "Symptome",
+							"options": [{
+									"name": "ja",
+									"next": "18"
+								}, {
+									"name": "nein",
+									"next": "18"
+								}
+							]
+						}, {
+							"id": "18",
+							"question": "Haben Sie Schnupfen? ",
+							"description": "",
+							"type": "atomic",
+							"category": "Symptome",
+							"options": [{
+									"name": "ja",
+									"next": "19"
+								}, {
+									"name": "nein",
+									"next": "19"
+								}
+							]
+						}, {
+							"id": "19",
+							"question": "Haben Sie Durchfall? Haben Sie Halsschmerzen? ",
+							"description": "",
+							"type": "atomic",
+							"category": "Symptome",
+							"options": [{
+									"name": "ja",
+									"next": "20"
+								}, {
+									"name": "nein",
+									"next": "20"
+								}
+							]
+						}, {
+							"id": "20",
+							"question": "Hatten Sie Kopfschmerzen? ",
+							"description": "",
+							"type": "atomic",
+							"category": "Symptome",
+							"options": [{
+									"name": "ja",
+									"next": "21"
+								}, {
+									"name": "nein",
+									"next": "21"
+								}
+							]
+						}, {
+							"id": "21",
+							"question": "Haben sich die Symptome in den letzten 14 Tagen entwickelt? ",
+							"description": "",
+							"type": "atomic",
+							"category": "Symptome",
+							"options": [{
+									"name": "ja",
+									"next": "22"
+								}, {
+									"name": "nein",
+									"next": "22"
+								}
+							]
+						}, {
+							"id": "22",
+							"question": "Sind die in den letzten 4 Wochen verreist? (innerhalb Deutschlands oder ins Ausland) ",
+							"description": "",
+							"type": "atomic",
+							"category": "Sonstiges",
+							"options": [{
+									"name": "ja",
+									"next": "23"
+								}, {
+									"name": "nein",
+									"next": "23"
+								}
+							]
+						}, {
+							"id": "23",
+							"question": "Hatten Sie engen Kontakt zu einem bestätigtem Fall?",
+							"description": "Kontakt von Angesicht zu Angesicht länger als 15 Minuten\r\nDirekter, physischer Kontakt (Berührung, Händeschütteln, Küssen)\r\nLänger als 15 Minuten direkt neben einer infizierten Person (weniger als 2 Meter) verbracht\r\nKontakt mit oder Austausch von Körperflüssigkeiten\r\nTeilen einer Wohnung",
+							"type": "atomic",
+							"category": "Sonstiges",
+							"options": [{
+									"name": "ja",
+									"next": "-1"
+								}, {
+									"name": "nein",
+									"next": "-1"
+								}
+							]
+						}
+					]
+				}
+				</textarea>
+			</div>
+			<div class="diagram" id="img"></div>
+		</div>		
+	</body>
+</html>
