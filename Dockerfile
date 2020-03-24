@@ -18,5 +18,5 @@ COPY . .
 RUN mvn clean install
 
 FROM openjdk:13-jdk-alpine AS deploy
-COPY --from=build /workspace/target/backend-0.0.1-SNAPSHOT.jar /opt/app/app.jar
+COPY --from=build /workspace/target/openhealthcheck-backend-0.0.1-SNAPSHOT.jar /opt/app/app.jar
 ENTRYPOINT ["java","-jar","/opt/app/app.jar"]
