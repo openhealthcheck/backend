@@ -19,20 +19,21 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
                     .antMatchers(HttpMethod.POST, "/**").hasRole("ADMIN")
                     .antMatchers("/**").permitAll()
                 .and()
                 .httpBasic()
                 .and()
-                .formLogin();
+                .formLogin().disable();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .withUser(username)
-                .password("{noop}" + password)
+                .password(password)
                 .roles("ADMIN");
     }
 }
